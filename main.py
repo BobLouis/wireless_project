@@ -21,6 +21,7 @@ img.fill(0)
 car_cnt = 0
 dir_x = [1, 0, -1, 0]
 dir_y = [0, -1, 0, 1]
+car_list = []
 
 
 class Car:
@@ -87,8 +88,8 @@ class Car:
         if(self.alive):
             cv2.rectangle(img, (self.x-8, self.y-8),
                           (self.x+8, self.y+8), blue, -1)
-            cv2.imshow('img', img)
-            print('id', self.id, '(', self.x, self.y, ') direc', self.dir)
+            # cv2.imshow('img', img)
+            # print('id', self.id, '(', self.x, self.y, ') direc', self.dir)
 
     def clear_display(self):
         if(self.alive):
@@ -138,21 +139,28 @@ def create_base():
 
 def create_car():
     car1 = Car(1, random.randint(0, 35))
-    car2 = Car(2, random.randint(0, 35))
-    car3 = Car(3, random.randint(0, 35))
     while True:
         car1.update()
-        car2.update()
-        car3.update()
         car1.display()
-        car2.display()
-        car3.display()
+        cv2.imshow('img', img)
         cv2.waitKey(1)
         car1.clear_display()
-        car2.clear_display()
-        car3.clear_display()
+
+
+def append_car():
+    for i in range(10):
+        car_list.append(Car(i, random.randint(0, 35)))
+    while True:
+        for car in car_list:
+            car.update()
+            car.display()
+        cv2.imshow('img', img)
+        cv2.waitKey(1)
+        # sleep(0.01)
+        for car in car_list:
+            car.clear_display()
 
 
 create_map()
 create_base()
-create_car()
+append_car()
