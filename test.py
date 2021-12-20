@@ -1,2 +1,2 @@
-dir_x = [1, 0, -1, 0]
-print(dir_x[0])
+a = ["s", "f", "j"]
+print(a.pop(1))
